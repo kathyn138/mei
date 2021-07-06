@@ -5,6 +5,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600, 
+    // transparent: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -36,7 +37,7 @@ app.whenReady().then(() => {
   }
 
   // Check whether a shortcut is registered.
-  console.log(globalShortcut.isRegistered('CommandOrControl+X'))
+  // console.log(globalShortcut.isRegistered('CommandOrControl+X'))
 })
 
 // quit app when all windows are closed
