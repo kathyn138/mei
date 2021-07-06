@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, globalShortcut } = require('electron');
 const path = require('path')
 
 function createWindow() {
@@ -18,9 +18,25 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow();
 
+  // for macs
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
+  const regCopy = globalShortcut.register('CommandOrControl+C', () => {
+    console.log('CommandOrControl+C is pressed');
+  });
+
+  const regPaste = globalShortcut.register('CommandOrControl+V', () => {
+    console.log('CommandOrControl+V is pressed');
+  });
+
+  if (!regCopy || !regPaste) {
+    console.log('registration failed')
+  }
+
+  // Check whether a shortcut is registered.
+  console.log(globalShortcut.isRegistered('CommandOrControl+X'))
 })
 
 // quit app when all windows are closed
